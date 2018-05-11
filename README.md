@@ -107,6 +107,85 @@ var result = array.map(x => x*x); // [1,4,9] 遍历数组运算
 **需要注意的是箭头函数没有自己的`this,arguments,super,new.target`,它们分别指向外层函数的相应变量**
 
 ###6 promise对象
+1. then()方法
+2. 链式调用
+3. 创建一个Promise
 
 
+###7 export命令,export default命令,import命令
 
+##### export:
+用于在创建JavaScript模块时,从模块中导出函数,对象或原始值,以便其他程序可以通过import语句使用它们.
+
+##### export和export default的区别:
+1. export 与 export default均可用于导出常量、函数、文件、模块等
+2. 你可以在其它文件或模块中通过`import+(常量 | 函数 | 文件 | 模块)`名的方式,将其导入,以便能够对其进行使用
+3. 在一个文件或模块中,**export和import可以有多个,export default仅有一个**
+4. 通过export方式导出,在导入时要加`{}`,export default则不需要
+
+##### 使用export default命令,为模块指定默认输出,这样就不需要知道所要加载模块的变量名. (在引入模块的文件中可以自定义引入的模块的名字)
+
+
+# webpack2 文档
+- **webpack模块概念**
+它可以将许多松散的模块按照依赖和规则打包成符合生产环境部署的前端资源.还可以将按需加载的模块进行代码分隔,等到实际需要的时候再异步加载. 通过loader的转换,任何形式的资源都可以视作模块,比如CommonJs模块,AMD模块,ES6模块,CSS,图片,JSON,Coffeescript,less等. 
+
+- **四个核心概念**
+1. 入口(Entry)
+应用程序的入口起点认为是 **根上下文或app第一个启动文件**
+在webpack中,我们使用webpack配置对象中的`entry`属性来定义入口
+```js
+module.exports = {
+    entry: './path/to/my/entry/file.js'
+}
+```
+
+2.出口(output)
+将所有的资源(assets)归拢在一起后,我们还需要告诉webpack在哪里打包我们的应用程序,webpack的`output`属性描述了如何处理归拢在一起的代码.
+...
+
+
+# vue-router 
+
+### 首先明确三个基本概念: route,routes,router
+
+1. route 
+这是一条路由,它是单数,Home按钮 => home内容,这是一条route. 它将点击按钮与页面联系起来
+
+2. routes
+这是一组路由,把上面的每一条路由组合起来,形成一个数组. `[{Home按钮 => home内容},{about按钮 => about内容}]`,routes即由多条route组成的数组
+
+3. router
+router是一个机制,相当于一个管理者,它来管理路由. 因为routes只是定义了一组路由,它放在那里是静止的,当真正来了请求,怎么办? 就是当用户点击home按钮的时候,怎么办? 这时router就起作用了,它到routes中去查找,,去找到对应的home内容,所以页面中就显示了home内容.
+
+客户端中的路由,实际上就是dom元素的显示和隐藏. 当页面中显示home内容的时候,about中的内容全部隐藏.客户端路由有两种实现方式: 基于hash和基于html5 history api.
+
+**vue-router中的路由也是基于上面的内容来实现的**
+
+在vue中我们的页面中所有内容都是组件化的,我们只要把路径和组件对应起来就可以了,然后在页面中把组件渲染出来.
+
+具体实现步骤:
+1. 在html模板中
+```js
+//app.vue
+<header>
+    <router-link to="/home">Home</router-link>   
+    <router-link to="/about">About</router-link>
+</header>
+
+<router-view/>
+```
+定义`router-link`和`router-view`两个标签,来对应点击和显示部分.  `router-link`就是定义页面点击的部分,`router-view`定义显示部分,就是点击后页面出现在什么地方.
+
+2. js中配置路由
+既然使用了router标签,所以需要定义router即配置路由,在src文件夹下新建`router.js`,**定义路径到组件的映射**
+```js
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+
+//引入组件,在app.vue中就不需要再引入了,只需要两个router标签即可
+import home from './components/home.vue'
+import about from './components/about.vue'
+
+//
+```
