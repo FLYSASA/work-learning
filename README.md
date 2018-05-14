@@ -156,7 +156,7 @@ module.exports = {
 这是一组路由,把上面的每一条路由组合起来,形成一个数组. `[{Home按钮 => home内容},{about按钮 => about内容}]`,routes即由多条route组成的数组
 
 3. router
-router是一个机制,相当于一个管理者,它来管理路由. 因为routes只是定义了一组路由,它放在那里是静止的,当真正来了请求,怎么办? 就是当用户点击home按钮的时候,怎么办? 这时router就起作用了,它到routes中去查找,,去找到对应的home内容,所以页面中就显示了home内容.
+router是一个机制,相当于一个管理者,它来管理路由. 因为routes只是定义了一组路由,它放在那里是静止的,当真正来了请求,怎么办? 就是当用户点击home按钮的时候,怎么办? 这时router就起作用了,它到routes中去查找,去找到对应的home内容,所以页面中就显示了home内容.
 
 客户端中的路由,实际上就是dom元素的显示和隐藏. 当页面中显示home内容的时候,about中的内容全部隐藏.客户端路由有两种实现方式: 基于hash和基于html5 history api.
 
@@ -187,5 +187,32 @@ import VueRouter from 'vue-router'
 import home from './components/home.vue'
 import about from './components/about.vue'
 
-//
+//告诉vue使用 VueRouter
+Vue.use(VueRouter)
+
+const routes = [   //定义映射关系
+    {
+        path: "/home",
+        component: home
+    },
+    {
+        path: '/about',
+        component: about
+    }
+]
+
+var router = new VueRouter({
+    routes         //将routes作为对象参数传给VueRouter的实例
+})
+
+export default router; //导出router
+```
+
+3. 把路由注入到根实例中,启动路由.
+```js
+//main.js
+import router from "/router.js"   //引入组件
+new Vue({
+    router
+})
 ```
