@@ -36,4 +36,29 @@
 
 
 ### Git Flow如何工作?
-1. 所有在Master分支上的commit应该tag
+###1. master分支 
+
+所有在Master分支上的commit应该tag
+打标签参考: https://jingyan.baidu.com/article/5d6edee2f611fa99eadeec01.html
+
+打完标签,记得push时勾选**包括标签**,一起push到服务器
+![](https://images.cnblogs.com/cnblogs_com/cnblogsfans/771108/o_git-workflow-release-cycle-1historical.png)
+
+###2. feature分支
+
+feature分支做完后,必须合并到develop分支.
+![](https://images.cnblogs.com/cnblogs_com/cnblogsfans/771108/o_git-workflow-release-cycle-2feature.png)
+
+###3. release分支
+
+基于**develop**分支创建,我们可以在这个release分支上测试,修改bug等(**一旦打了release分支之后不要在develop分支上合并新的改动到release分支**)
+
+发布release分支时,合并release到master和develop,同时在master分支上打上tag记住release版本号,然后就可以删除release分支了.
+
+![](https://images.cnblogs.com/cnblogs_com/cnblogsfans/771108/o_git-workflow-release-cycle-3release.png)
+
+###4. 维护分支hotfix
+
+hotfix分支基于**master**分支创建,开发完后需要合并回master和develop分支,同时在master上打一个tag.
+
+![](https://images.cnblogs.com/cnblogs_com/cnblogsfans/771108/o_git-workflow-release-cycle-4maintenance.png)
