@@ -125,6 +125,8 @@ var result = array.map(x => x*x); // [1,4,9] 遍历数组运算
 
 ##### 使用export default命令,为模块指定默认输出,这样就不需要知道所要加载模块的变量名. (在引入模块的文件中可以自定义引入的模块的名字)
 
+参考: https://blog.csdn.net/zhou_xiao_cheng/article/details/52759632
+
 
 # webpack2 文档
 - **webpack模块概念**
